@@ -17,6 +17,13 @@
             ],
 
             [
+                'name' => 'The Monk Who Sold His Ferrari',
+                'author' => 'Robin Sharma',
+                'releaseYear'=> '1996',
+                'purchaseUrl'=> 'https://www.amazon.com/Monk-Who-Sold-His-Ferrari/dp/0062515675'
+            ],
+
+            [
                 'name' => 'Becoming',
                 'author' => 'Michelle Obama',
                 'releaseYear'=> '2018',
@@ -32,19 +39,31 @@
             ]
             
         ];
+
+        function filterByAuthor($books, $author) {
+            $filteredBooks = [];
+
+            foreach($books as $book){
+                if ($book['author'] === $author){
+                    $filteredBooks[] = $book;
+                }
+            }
+
+            return $filteredBooks;
+        }
+
+        //filterByAuthor();
     ?>
     
     <ul>
-        <?php foreach ($books as $book): ?>
-            <?php if ($book['author'] === 'Robin Sharma'): ?>
+        <?php foreach (filterByAuthor($books, 'Robin Sharma') as $book): ?>
             <li>
-                    <a href="<?= $book['purchaseUrl'];?>">
-                        <?= $book['name']; ?> (<?= $book    ['releaseYear']?>) - By <?= $book['author']?>
-                    </a>
-                </li>
-            <?php endif ; ?>
+                <a href="<?= $book['purchaseUrl'];?>">
+                    <?= $book['name']; ?> (<?= $book    ['releaseYear']?>) - By <?= $book['author']?>
+                </a>
+            </li>    
         <?php endforeach; ?>
     </ul>
-    
+
 </body>
 </html>
