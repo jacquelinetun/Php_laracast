@@ -39,22 +39,27 @@
             ]
             
         ];
+        
+        // function filter($items, $fn)
+        // {
+        //     $filteredItems = [];
 
-        function filterByAuthor($books, $author) {
-            $filteredBooks = [];
+        //     foreach($items as $item){
+        //         if ($fn($item)) {
+        //             $filteredItems[] = $item;
+        //         }
+        //     }
 
-            foreach($books as $book){
-                if ($book['author'] === $author){
-                    $filteredBooks[] = $book;
-                }
-            }
+        //     return $filteredItems;
+        // }
 
-            return $filteredBooks;
-        }
+        $filteredBooks = array_filter($books, function($book){
+            return $book['releaseYear'] >= 2017;
+        });
     ?>
     
     <ul>
-        <?php foreach (filterByAuthor($books, 'Robin Sharma') as $book): ?>
+        <?php foreach ($filteredBooks as $book): ?>
             <li>
                 <a href="<?= $book['purchaseUrl'];?>">
                     <?= $book['name']; ?> (<?= $book    ['releaseYear']?>) - By <?= $book['author']?>
